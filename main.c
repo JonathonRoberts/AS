@@ -8,9 +8,11 @@ int main(int argc, char *argv[])
 	char a = ' ';
 	char b;
 	char line[MAXLINECOUNT][5][30];
+	int linelc[MAXLINECOUNT];
 	short int opcount;
 	int i;
 	int lineno=0;
+	int lc=0;
 	char tmp[30];
 
 	fp=fopen("main.asm", "r");
@@ -34,6 +36,9 @@ int main(int argc, char *argv[])
 				case EOF:
 					break;
 				case '\n':
+					linelc[lineno]=lc;
+					if(opcount!=0)lc+=8;
+					printf("LC=%d\n",linelc[lineno]);
 					for(i=0;i<=opcount;i++)
 						printf("%s ",line[lineno][i]);
 					printf("\n");
